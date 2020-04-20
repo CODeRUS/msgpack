@@ -2,7 +2,7 @@ Name:		msgpack
 Version:	3.1.0
 Release:	3%{?dist}
 Summary:	Binary-based efficient object serialization library
-
+Group:      System/Libraries
 License:	Boost
 URL:		http://msgpack.org
 Source0:	https://github.com/msgpack/msgpack-c/releases/download/cpp-%{version}/%{name}-%{version}.tar.gz
@@ -39,6 +39,12 @@ popd
 
 %install
 make install/fast DESTDIR=$RPM_BUILD_ROOT -C obj
+
+%post
+/sbin/ldconfig
+
+%postun
+/sbin/ldconfig
 
 %files
 %{_libdir}/*.so.*
